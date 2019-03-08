@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
 """
-@author:homework
-@file:hello.py
-@time:2019/01/27 23:45:20
+@version : 
+@file : hello.py
+@time : 2019/03/09 01:04:39
+@func : 
 """
 import platform
 

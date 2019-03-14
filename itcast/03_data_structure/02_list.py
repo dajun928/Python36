@@ -20,8 +20,8 @@ def t1():
 def t2():
     li = []
     for i in range(10000):
-        li = li + [i]
-        # li += [i]
+        # li = li + [i] # 效率太低了
+        li += [i]  # 效率比较高
 
 def t3():
     li = [i for i in range(10000)]

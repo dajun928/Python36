@@ -1,3 +1,12 @@
+#!/usr/bin/python
+# -*- coding:utf-8 -*-
+"""
+@version : 3.6.3
+@file : _dequeue.py.py
+@time : 2019/03/12 23:46:52
+@func : 双端队列
+"""
+
 class Deque(object):
     """双端队列"""
 
@@ -30,12 +39,13 @@ class Deque(object):
 
 
 if __name__ == "__main__":
-    s = Queue()
-    s.enqueue(1)
-    s.enqueue(2)
-    s.enqueue(3)
-    s.enqueue(4)
-    print(s.dequeue())
-    print(s.dequeue())
-    print(s.dequeue())
-    print(s.dequeue())
+    s = Deque()
+    s.add_front(1)
+    s.add_front(2)
+    s.add_rear(3)
+    s.add_rear(4)
+    print(s.pop_front())
+    print(s.pop_front())
+    print(s.pop_front())
+    print(s.pop_front())
+

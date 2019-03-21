@@ -1,10 +1,8 @@
-# coding:utf-8
-
 def merge_sort(alist):
     if len(alist) <= 1:
         return alist
     # 二分分解
-    num = len(alist)/2
+    num = len(alist)//2
     left = merge_sort(alist[:num])
     right = merge_sort(alist[num:])
     # 合并
@@ -27,5 +25,6 @@ def merge(left, right):
     return result
 
 alist = [54,26,93,17,77,31,44,55,20]
+print(alist)
 sorted_alist = merge_sort(alist)
 print(sorted_alist)

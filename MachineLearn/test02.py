@@ -177,6 +177,16 @@ def pca():
 if __name__ == "__main__":
     # c1, c2, c3= cutword()
     # print(c1)
+
+
+
+
+
+
+
+
+
+
     # print(c2)
     # print(c3)
     # hanzivec()

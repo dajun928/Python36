@@ -179,14 +179,6 @@ if __name__ == "__main__":
     # print(c1)
 
 
-
-
-
-
-
-
-
-
     # print(c2)
     # print(c3)
     # hanzivec()

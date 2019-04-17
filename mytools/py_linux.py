@@ -26,9 +26,6 @@ hostname=''
 username=''
 password=''
 
-
-
 # 调用模块，传入liunx的ip/用户名/密码，并打印返回结果
 result=con_linux(hostname=hostname, username=username, password=password)
 print (result)
-

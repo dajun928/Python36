@@ -1,13 +1,18 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-  
 """
-@version : 3.6.3
-@file : copy_file.py
-@time : 2019/04/16 19:21:50
+@version : 
+@file : control.py
+@time : 2019/04/16 00:09:31
 @func : 
 """
+
+from apscheduler.schedulers.blocking import BlockingScheduler
+from datetime import datetime
+import subprocess
 import os
 import shutil
+
 
 #通过校验MD5 判断B内的文件与A 不同
 def get_MD5(file_path):
@@ -47,7 +52,7 @@ def copyfile(src, dsc):
             tmp_list.append(tmp_trup)
     return tmp_list
 
-def main():
+def cut_single_file():
     A = r"/root/homework"
     B = r"/root/Projects/gitdemo/test/Tool"
     copydir(A, B)
@@ -59,5 +64,29 @@ def main():
         # print(dsc_path)
         shutil.move(src_file, dsc_path)
 
+
+#本类的方法
+def push():
+    print('Tick! The time is: %s' % datetime.now())
+    cmd = 'sh push.sh auto_control.py'
+    subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
+
 if __name__ == '__main__':
-    main()
+    scheduler = BlockingScheduler()
+
+    # 设置定时调度本类的方法
+    scheduler.add_job(cut_single_file, 'cron', hour ='16',minute ='20')
+
+    scheduler.add_job(push, 'cron', hour ='16',minute ='20')
+
+    # 启动调度
+    try:
+        scheduler.start()
+    except (KeyboardInterrupt, SystemExit):
+        scheduler.shutdown()
+
+
+
+
+
+

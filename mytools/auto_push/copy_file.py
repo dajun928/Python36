@@ -9,11 +9,6 @@
 import os
 import shutil
 
-#通过校验MD5 判断B内的文件与A 不同
-def get_MD5(file_path):
-    files_md5 = os.popen('md5 %s' % file_path).read().strip()
-    file_md5 = files_md5.replace('MD5 (%s) = ' % file_path, '')
-    return file_md5
 
 def copydir(path, out):
     for files in os.listdir(path):
@@ -21,9 +16,8 @@ def copydir(path, out):
         back_name = os.path.join(out, files)
         if os.path.isfile(name):
             if os.path.isfile(back_name):
-                if get_MD5(name) != get_MD5(back_name):
-                    pass
-                    # print(back_name)
+                # print(back_name)
+                pass
             else:
                 # print(back_name)
                 pass
@@ -48,15 +42,15 @@ def copyfile(src, dsc):
     return tmp_list
 
 def main():
-    A = r"/root/homework"
-    B = r"/root/Projects/gitdemo/test/Tool"
+    A = r"D:\test\b"
+    B = r"D:\test\a"
     copydir(A, B)
     result = copyfile(A, B)
     # print(result)
     if result:
         src_file, dsc_path = result.pop()
-        # print(src_file)
-        # print(dsc_path)
+        print(src_file)
+        print(dsc_path)
         shutil.move(src_file, dsc_path)
 
 if __name__ == '__main__':

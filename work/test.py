@@ -3,7 +3,11 @@ from tencentcloud.common.profile.client_profile import ClientProfile
 from tencentcloud.common.profile.http_profile import HttpProfile
 from tencentcloud.common.exception.tencent_cloud_sdk_exception import TencentCloudSDKException
 from tencentcloud.tmt.v20180321 import tmt_client, models
-
+'''
+腾讯翻译接口封装
+https://console.cloud.tencent.com/tmt/manage
+https://github.com/TencentCloud/tencentcloud-sdk-python
+'''
 try:
     cred = credential.Credential("AKIDShgQukxejY7QTVDyMUN0OWP7ZooYbLMA", "mKdhX8UaQ5UdXBaqrdJn34qOimbQ0MTL")
     httpProfile = HttpProfile()

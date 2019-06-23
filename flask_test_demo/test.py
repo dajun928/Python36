@@ -15,9 +15,9 @@ app = Flask(__name__)
 # 定义路由及视图函数
 @app.route('/')
 def hello_world():
-    # return 'Hello World!'
-    return render_template('index.html')
+    return 'Hello 666 World!'
+    # return render_template('index.html')
 
 # 启动程序
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

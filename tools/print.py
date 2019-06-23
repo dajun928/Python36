@@ -22,13 +22,17 @@ def get_week_day(i):
 
 def main():
     year=2019
-    month=2
+    month=6
     rets=calendar.monthcalendar(year,month)
     for ret in rets:
         for index,i in enumerate(ret):
             if i!=0:
-                print("* * *")
-                print("##### "+str(year)+"年"+str(month)+"月"+str(i)+"日"+ "  " + get_week_day(index))
+                # print("* * *")
+                # print("##### " + str(year) + "年" + str(month) + "月" + str(i) + "日" + "  " + get_week_day(index))
+                # print("1. ")
+
+                print("-" * 62 + ">")
+                print(str(year) + "年" + str(month) + "月" + str(i) + "日" + "  " + get_week_day(index))
                 print("1. ")
 
 if __name__ == '__main__':

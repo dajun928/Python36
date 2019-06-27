@@ -8,7 +8,7 @@
 """
 # coding:utf-8
 
-from flask import Flask, render_template, request, redirect, url_for, make_response,jsonify
+from flask import Flask, render_template, request, redirect, url_for, make_response, jsonify
 from werkzeug.utils import secure_filename
 import os
 import cv2
@@ -16,11 +16,13 @@ import time
 
 from datetime import timedelta
 
-#设置允许的文件格式
+# 设置允许的文件格式
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'JPG', 'PNG', 'bmp'])
+
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
 
 app = Flask(__name__)
 # 设置静态文件缓存过期时间
@@ -48,7 +50,7 @@ def upload():
         img = cv2.imread(upload_path)
         cv2.imwrite(os.path.join(basepath, 'static/images', 'test.jpg'), img)
 
-        return render_template('upload_ok.html',userinput=user_input,val1=time.time())
+        return render_template('upload_ok.html', userinput=user_input, val1=time.time())
 
     return render_template('upload.html')
 
@@ -56,4 +58,3 @@ def upload():
 if __name__ == '__main__':
     # app.debug = True
     app.run(host='0.0.0.0', port=8987, debug=True)
-

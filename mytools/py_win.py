@@ -8,7 +8,7 @@
 """
 import subprocess
 
-cmd = 'ls'
+cmd = 'll'
 a = subprocess.getstatusoutput(cmd)
 
 print(type(a))

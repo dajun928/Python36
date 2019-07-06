@@ -6,15 +6,7 @@
 @time : 2019/06/29 17:36:03
 @func : 
 """
+import platform
 
-from bs4 import BeautifulSoup
+print(platform.python_version())
 
-from PIL import Image
-from io import BytesIO
-import requests
-url='https://weibo.com/p/1005053803673000/photos?from=page_100505&mod=TAB#place'
-webdata = requests.get(url).text
-
-
-
-print(webdata)

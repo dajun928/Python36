@@ -21,8 +21,10 @@ def get_week_day(i):
   return week_day_dict[i]
 
 def main():
-    year=2019
-    month=6
+    import datetime
+    year=datetime.datetime.now().year
+    month=datetime.datetime.now().month
+    # month=5
     rets=calendar.monthcalendar(year,month)
     for ret in rets:
         for index,i in enumerate(ret):

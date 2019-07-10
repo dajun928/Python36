@@ -4,7 +4,7 @@
 @version : https://blog.csdn.net/qq_37616069/article/details/80376776
 @file : test_demo.py
 @time : 2019/06/27 23:36:35
-@func :
+@func : cc
 
 
 使用response.text 时，Requests 会基于 HTTP 响应的文本编码自动解码响应内容，大多数 Unicode 字符集都能被无缝地解码。

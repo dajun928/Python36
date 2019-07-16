@@ -13,7 +13,8 @@
 """
 import requests
 
-url="http://127.0.0.1:5000/"
+# url="http://127.0.0.1:5000/"
+url="http://47.107.177.19:5001/"
 responses=requests.get(url)
 
 print(responses)

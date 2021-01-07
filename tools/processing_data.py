@@ -8,23 +8,63 @@
 """
 import datetime
 import xlwt
+import pdb
 
-def write_excel(file_path,sheet_name,datas):
+def write_excel(file_path, data1,data2):
     f = xlwt.Workbook(encoding='utf-8')
-    sheet1 = f.add_sheet(sheet_name, cell_overwrite_ok=False)
+    sheet1 = f.add_sheet(u"统计数据", cell_overwrite_ok=True)
     title1 = ["管理员", "总计设备数", "设备类型", "分类设备数", "netbase监控率", "Wup监控率"]
-    datas.insert(0, title1)  # 写入表头
-    # 将数据写入第 i 行，第 j 列
+    # data1.insert(0, title1)
+    style = xlwt.XFStyle()
+    align = xlwt.Alignment()
+    align.horz = 1
+    style.alignment = align
+    for j in range(len(title1)):
+        sheet1.write(0, j, title1[j], style=style)
+    i = 1
+
+    items_num=len(data1)
+    tmp1_set=()
+    for data in data1:
+        items_num-=1
+        device_kinds=data[-1]
+        data=data[:-1]
+        tmp_set=(data[0],data[1],device_kinds)
+        print(tmp_set)
+        for a in range(device_kinds):
+            print(a)
+        print(11111111111111111111111111111111111)
+        # print(device_kinds)
+        for j in range(len(data)):
+            sheet1.write(i, j, data[j], style=style)
+            # print(device_kinds)
+        i+=1
+    set1=("张三",7,4)
+    sheet1.write_merge(1,set1[2],0,0, set1[0])  # 合并列单元格
+    sheet1.write_merge(1,set1[2],1,1,set1[1])  # 合并列单元格
+    set2=('李四', 5, 3)
+    sheet1.write_merge(set1[2]+1,set1[2]+set2[2], 0, 0, u'暂无2')  # 合并列单元格
+    sheet1.write_merge(set1[2]+1,set1[2]+set2[2], 1, 1, 3)  # 合并列单元格
+    set3=('王五', 5, 3)
+    sheet1.write_merge(8, 10, 0, 0, u'暂无3')  # 合并列单元格
+    sheet1.write_merge(8, 10, 1, 1, 3)  # 合并列单元格
+
+    f.save(file_path)
+
+    sheet2 = f.add_sheet(u"设备详细信息", cell_overwrite_ok=True)
+    title1 = ["管理IP", "监控类型", "主机名", "设备管理员", "netbase监控", "Wup监控"]
+    data2.insert(0, title1)  # 写入表头
     style = xlwt.XFStyle()
     align = xlwt.Alignment()
     align.horz = 1
     style.alignment = align
     i = 0
-    for data in datas:
+    for data in data2:
         for j in range(len(data)):
-            sheet1.write(i, j, data[j], style=style)
+            sheet2.write(i, j, data[j], style=style)
         i = i + 1
-    f.save(file_path)  # 保存文件
+    # f.save(file_path)
+
 
 
 def analysis_data(datas):
@@ -35,15 +75,17 @@ def analysis_data(datas):
             adminitors.setdefault(i[3], []).append(i)
         else:
             adminitors[i[3]] = [i]
-    device_type = {}
     for k, v in adminitors.items():
+        device_type = {}
         sum_devices = len(v)
         for i in v:
             if i[1] in device_type:
                 device_type.setdefault(i[1], []).append(i)
             else:
                 device_type[i[1]] = [i]
+        davice_counts=len(device_type)
         device_type_keys = device_type.keys()
+        # pdb.set_trace()
         for device_type_key in device_type_keys:
             items = device_type[device_type_key]
             items_num = len(items)
@@ -56,7 +98,7 @@ def analysis_data(datas):
                     whatsup_true_num += 1
             netbse_rate = '{:.2f}%'.format(netbase_true_num / items_num * 100)
             wup_rate = '{:.2f}%'.format(whatsup_true_num / items_num * 100)
-            tmp_list.append([k, sum_devices, device_type_key, items_num, netbse_rate, wup_rate])
+            tmp_list.append([k, sum_devices, device_type_key, items_num, netbse_rate, wup_rate,davice_counts])
     return tmp_list
 
 if __name__ == '__main__':
@@ -80,5 +122,6 @@ if __name__ == '__main__':
     tmp_list=analysis_data(datas)
     # print(tmp_list)
     str_time = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
-    write_excel("1安全管理员对应设备类型统计%s.xls" % str_time, "统计数据",tmp_list)
-    write_excel("2安全管理员对应设备类型统计%s.xls" % str_time, "设备详细信息",datas)
+    write_excel("安全管理员对应设备类型统计%s.xls" % str_time,tmp_list,datas)
+
+    

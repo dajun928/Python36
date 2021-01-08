@@ -31,11 +31,12 @@ res_data.index = res_data.set_index(['管理员', '总计设备数', '设备类�
 res = res_data.iloc[:, 3:]
 
 data_list = data.values.tolist()
+print(data_list)
 res1 = pd.DataFrame(data_list, columns=["管理IP", "监控类型", "主机名", "设备管理员", "netbase监控", "WhatsUp监控"])
 res1.set_index(["管理IP"], inplace=True)
 
 
-res.to_excel(writer, sheet_name='统计数据')
-res1.to_excel(writer, sheet_name='设备详细信息')
-writer.save()
-writer.close()
+# res.to_excel(writer, sheet_name='统计数据')
+# res1.to_excel(writer, sheet_name='设备详细信息')
+# writer.save()
+# writer.close()

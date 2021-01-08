@@ -10,7 +10,7 @@ import datetime
 import xlwt
 
 
-def set_Style(name,size,color,borders_size,color_fore,blod=False):
+def set_Style(name, size, color, borders_size, color_fore, blod=False):
     style = xlwt.XFStyle()  # 初始化样式
     # 字体
     font = xlwt.Font()
@@ -23,7 +23,7 @@ def set_Style(name,size,color,borders_size,color_fore,blod=False):
     alignment = xlwt.Alignment()  # 居中
     alignment.horz = xlwt.Alignment.HORZ_CENTER
     alignment.vert = xlwt.Alignment.VERT_CENTER
-    style.alignment=alignment
+    style.alignment = alignment
     # 边框
     borders = xlwt.Borders()
     borders.left = xlwt.Borders.THIN
@@ -50,11 +50,11 @@ def write_excel(file_path, data1, data2):
     title1 = ["管理员", "总计设备数", "设备类型", "分类设备数", "netbase监控率", "Wup监控率"]
 
     # 设置列宽
-    sheet_list=['first_'+str(i) for i in range(len(title1))]
+    sheet_list = ['first_' + str(i) for i in range(len(title1))]
     for i in range(len(title1)):
         sheet_list[i] = sheet1.col(i)
     for i in range(len(title1)):
-        if i ==2:
+        if i == 2:
             sheet_list[i].width = 256 * 40
         else:
             sheet_list[i].width = 256 * 20
@@ -93,8 +93,8 @@ def write_excel(file_path, data1, data2):
     for k in dict_list:
         name = list(k.keys())[0]
         number, step = list(k.values())[0]
-        sheet1.write_merge(step0 + 1, step0 + step, 0, 0, name,style=style)  # 合并单元格
-        sheet1.write_merge(step0 + 1, step0 + step, 1, 1, number,style=style)
+        sheet1.write_merge(step0 + 1, step0 + step, 0, 0, name, style=style)  # 合并单元格
+        sheet1.write_merge(step0 + 1, step0 + step, 1, 1, number, style=style)
         step0 += step
     f.save(file_path)
 
@@ -106,7 +106,7 @@ def write_excel(file_path, data1, data2):
     for i in range(len(title2)):
         sheet_list[i] = sheet2.col(i)
     for i in range(len(title2)):
-        if i ==2:
+        if i == 2:
             sheet_list[i].width = 256 * 40
         else:
             sheet_list[i].width = 256 * 20

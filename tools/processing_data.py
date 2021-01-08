@@ -9,15 +9,70 @@
 import datetime
 import xlwt
 
+
+def set_Style(name,size,color,borders_size,color_fore,blod=False):
+    style = xlwt.XFStyle()  # 初始化样式
+    # 字体
+    font = xlwt.Font()
+    font.name = name
+    font.height = 20 * size  # 字号
+    font.bold = blod  # 加粗
+    font.colour_index = color  # 默认：0x7FFF 黑色：0x08
+    style.font = font
+    # 居中
+    alignment = xlwt.Alignment()  # 居中
+    alignment.horz = xlwt.Alignment.HORZ_CENTER
+    alignment.vert = xlwt.Alignment.VERT_CENTER
+    style.alignment=alignment
+    # 边框
+    borders = xlwt.Borders()
+    borders.left = xlwt.Borders.THIN
+    borders.right = xlwt.Borders.THIN
+    borders.top = xlwt.Borders.THIN
+    borders.bottom = borders_size  # 自定义：1：细线；2：中细线；3：虚线；4：点线
+    style.borders = borders
+    # 背景颜色
+    pattern = xlwt.Pattern()
+    pattern.pattern = xlwt.Pattern.SOLID_PATTERN  # 设置背景颜色的模式(NO_PATTERN; SOLID_PATTERN)
+    pattern.pattern_fore_colour = color_fore  # 默认：无色：0x7FFF；黄色：0x0D；蓝色：0x0C
+    style.pattern = pattern
+
+    return style
+
+
 def write_excel(file_path, data1, data2):
     f = xlwt.Workbook(encoding='utf-8')
     # 写入sheet1
     sheet1 = f.add_sheet(u"统计数据", cell_overwrite_ok=True)
+
+    # 设置统一样式
+    style = set_Style('宋体', 12, 0x08, 2, 0x7FFF, blod=False)
     title1 = ["管理员", "总计设备数", "设备类型", "分类设备数", "netbase监控率", "Wup监控率"]
-    style = xlwt.XFStyle()
-    align = xlwt.Alignment()
-    align.horz = 1
-    style.alignment = align
+
+    # 设置列宽
+    sheet_list=['first_'+str(i) for i in range(len(title1))]
+    for i in range(len(title1)):
+        sheet_list[i] = sheet1.col(i)
+    for i in range(len(title1)):
+        if i ==2:
+            sheet_list[i].width = 256 * 40
+        else:
+            sheet_list[i].width = 256 * 20
+
+    # first_0 = sheet1.col(0)
+    # first_1 = sheet1.col(1)
+    # first_2 = sheet1.col(2)
+    # first_3 = sheet1.col(3)
+    # first_4 = sheet1.col(4)
+    # first_5 = sheet1.col(5)
+    #
+    # first_0.width = 256 * 20
+    # first_1.width = 256 * 20
+    # first_2.width = 256 * 20
+    # first_3.width = 256 * 20
+    # first_4.width = 256 * 20
+    # first_5.width = 256 * 20
+
     for j in range(len(title1)):
         sheet1.write(0, j, title1[j], style=style)
     i = 1
@@ -38,19 +93,24 @@ def write_excel(file_path, data1, data2):
     for k in dict_list:
         name = list(k.keys())[0]
         number, step = list(k.values())[0]
-        sheet1.write_merge(step0 + 1, step0 + step, 0, 0, name)  # 合并单元格
-        sheet1.write_merge(step0 + 1, step0 + step, 1, 1, number)
+        sheet1.write_merge(step0 + 1, step0 + step, 0, 0, name,style=style)  # 合并单元格
+        sheet1.write_merge(step0 + 1, step0 + step, 1, 1, number,style=style)
         step0 += step
     f.save(file_path)
 
     # 写入sheet2
     sheet2 = f.add_sheet(u"设备详细信息", cell_overwrite_ok=True)
-    title1 = ["管理IP", "监控类型", "主机名", "设备管理员", "netbase监控", "Wup监控"]
-    data2.insert(0, title1)
-    style = xlwt.XFStyle()
-    align = xlwt.Alignment()
-    align.horz = 1
-    style.alignment = align
+    title2 = ["管理IP", "监控类型", "主机名", "设备管理员", "netbase监控", "Wup监控"]
+    # 设置列宽
+    sheet_list = ['first_' + str(i) for i in range(len(title2))]
+    for i in range(len(title2)):
+        sheet_list[i] = sheet2.col(i)
+    for i in range(len(title2)):
+        if i ==2:
+            sheet_list[i].width = 256 * 40
+        else:
+            sheet_list[i].width = 256 * 20
+    data2.insert(0, title2)
     i = 0
     for data in data2:
         for j in range(len(data)):

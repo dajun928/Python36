@@ -59,20 +59,6 @@ def write_excel(file_path, data1, data2):
         else:
             sheet_list[i].width = 256 * 20
 
-    # first_0 = sheet1.col(0)
-    # first_1 = sheet1.col(1)
-    # first_2 = sheet1.col(2)
-    # first_3 = sheet1.col(3)
-    # first_4 = sheet1.col(4)
-    # first_5 = sheet1.col(5)
-    #
-    # first_0.width = 256 * 20
-    # first_1.width = 256 * 20
-    # first_2.width = 256 * 20
-    # first_3.width = 256 * 20
-    # first_4.width = 256 * 20
-    # first_5.width = 256 * 20
-
     for j in range(len(title1)):
         sheet1.write(0, j, title1[j], style=style)
     i = 1
